@@ -24,7 +24,7 @@ const DisplayDataPage = () => {
 
   const handleDownload = (resumePath) => {
     const link = document.createElement("a");
-    link.href = `http://localhost:4000/${resumePath}`;
+    link.href = `https://server-n781.onrender.com/${resumePath}`;
     link.download = "resume.docx";
     link.click();
   };
