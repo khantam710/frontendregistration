@@ -215,6 +215,15 @@ th {
   background-color: #9b59b6;
   color:white;
 }
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 20px;
+  color: #007bff; /* Loading text color */
+}
+
 
 
 

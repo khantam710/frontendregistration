@@ -5,17 +5,20 @@ import { MDBTable, MDBTableBody, MDBTableHead } from "mdb-react-ui-kit";
 
 const DisplayDataPage = () => {
   const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/registration/user/get-user"
+          "https://server-n781.onrender.com/registration/user/get-user"
         );
         setUserData(response.data);
+        setLoading(false)
         // console.log(response.data, "data")
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false)
       }
     };
 
@@ -32,7 +35,11 @@ const DisplayDataPage = () => {
   return (
     <div className="container mt-5">
       <h2>VIEW ALL USERS</h2>
-      <table>
+      {
+        loading ? (
+          <div className="loader">Loading...</div>
+        ) : (
+          <table>
         <thead>
           <tr className="head">
             <th>Name</th>
@@ -46,7 +53,14 @@ const DisplayDataPage = () => {
         </thead>
         <tbody>
           {userData.map((user, index) => (
-            <tr key={user._id} className={index % 2 == 0 ? "even-row animate__animated animate__fadeInLeft" : "odd-row animate__animated animate__fadeInRight"}>
+            <tr
+              key={user._id}
+              className={
+                index % 2 == 0
+                  ? "even-row animate__animated animate__fadeInLeft"
+                  : "odd-row animate__animated animate__fadeInRight"
+              }
+            >
               <td>{user.name}</td>
               <td>{user.dob}</td>
               <td>{user.gender}</td>
@@ -65,6 +79,8 @@ const DisplayDataPage = () => {
           ))}
         </tbody>
       </table>
+        )
+      }
     </div>
   );
 };
